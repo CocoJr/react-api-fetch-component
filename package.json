@@ -1,6 +1,6 @@
 {
   "name": "react-api-fetch-component",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A react fetch component. Usefull for consuming API.",
   "main": "build/index.js",
   "repository": {

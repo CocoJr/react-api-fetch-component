@@ -116,6 +116,8 @@ class Fetch extends Component {
     }
 
     async fetch(body, complementHeaders) {
+        this.setState({loading: true});
+
         const {beforeRequest, onError, onSuccess} = this.props;
 
         if (!complementHeaders) {

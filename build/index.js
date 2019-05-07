@@ -339,6 +339,8 @@ var Fetch = function (_Component) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
+                                this.setState({ loading: true });
+
                                 _props4 = this.props, beforeRequest = _props4.beforeRequest, onError = _props4.onError, onSuccess = _props4.onSuccess;
 
 
@@ -369,14 +371,14 @@ var Fetch = function (_Component) {
                                 });
 
                                 if (!(typeof beforeRequest === "function")) {
-                                    _context.next = 15;
+                                    _context.next = 16;
                                     break;
                                 }
 
-                                _context.next = 15;
+                                _context.next = 16;
                                 return beforeRequest(request);
 
-                            case 15:
+                            case 16:
                                 return _context.abrupt("return", fetch(request).then(function (response) {
                                     if (response.ok) {
                                         return response.json();
@@ -456,7 +458,7 @@ var Fetch = function (_Component) {
                                     }
                                 }));
 
-                            case 16:
+                            case 17:
                             case "end":
                                 return _context.stop();
                         }
