@@ -320,7 +320,7 @@ var Fetch = function (_Component) {
     }, {
         key: "fetch",
         value: function (_fetch) {
-            function fetch(_x, _x2) {
+            function fetch(_x) {
                 return _fetch.apply(this, arguments);
             }
 
@@ -330,7 +330,7 @@ var Fetch = function (_Component) {
 
             return fetch;
         }(function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(body, complementHeaders) {
+            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(body) {
                 var _this2 = this;
 
                 var _props4, beforeRequest, onError, onSuccess, url, method, headers, referrer, mode, credentials, redirect, integrity, cache, request;
@@ -339,18 +339,19 @@ var Fetch = function (_Component) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                this.setState({ loading: true });
-
-                                _props4 = this.props, beforeRequest = _props4.beforeRequest, onError = _props4.onError, onSuccess = _props4.onSuccess;
-
-
-                                if (!complementHeaders) {
-                                    complementHeaders = {};
+                                if (this.state.loading) {
+                                    this.controller.abort();
+                                    this.controller = new AbortController();
                                 }
 
+                                _context.next = 3;
+                                return this.setState({ loading: true });
+
+                            case 3:
+                                _props4 = this.props, beforeRequest = _props4.beforeRequest, onError = _props4.onError, onSuccess = _props4.onSuccess;
                                 url = this.props.baseUrl + this.props.url;
                                 method = this.props.method;
-                                headers = Object.assign({}, this.props.baseHeaders, this.props.headers, complementHeaders);
+                                headers = Object.assign({}, this.props.baseHeaders, this.props.headers);
                                 referrer = this.props.referrer;
                                 mode = this.props.mode || this.props.baseMode;
                                 credentials = this.props.credentials || this.props.baseCredentials;
@@ -371,14 +372,14 @@ var Fetch = function (_Component) {
                                 });
 
                                 if (!(typeof beforeRequest === "function")) {
-                                    _context.next = 16;
+                                    _context.next = 17;
                                     break;
                                 }
 
-                                _context.next = 16;
+                                _context.next = 17;
                                 return beforeRequest(request);
 
-                            case 16:
+                            case 17:
                                 return _context.abrupt("return", fetch(request).then(function (response) {
                                     if (response.ok) {
                                         return response.json();
@@ -458,7 +459,7 @@ var Fetch = function (_Component) {
                                     }
                                 }));
 
-                            case 17:
+                            case 18:
                             case "end":
                                 return _context.stop();
                         }
@@ -466,7 +467,7 @@ var Fetch = function (_Component) {
                 }, _callee, this);
             }));
 
-            return function (_x3, _x4) {
+            return function (_x2) {
                 return _ref.apply(this, arguments);
             };
         }())

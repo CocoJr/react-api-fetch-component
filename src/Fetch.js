@@ -115,18 +115,19 @@ class Fetch extends Component {
         );
     }
 
-    async fetch(body, complementHeaders) {
-        this.setState({loading: true});
+    async fetch(body) {
+        if (this.state.loading) {
+            this.controller.abort();
+            this.controller = new AbortController();
+        }
+
+        await this.setState({loading: true});
 
         const {beforeRequest, onError, onSuccess} = this.props;
 
-        if (!complementHeaders) {
-            complementHeaders = {};
-        }
-
-        let url = this.props.baseUrl + this.props.url;
+        const url = this.props.baseUrl + this.props.url;
         const method = this.props.method;
-        const headers = Object.assign({}, this.props.baseHeaders, this.props.headers, complementHeaders);
+        const headers = Object.assign({}, this.props.baseHeaders, this.props.headers);
         const referrer = this.props.referrer;
         const mode = this.props.mode || this.props.baseMode;
         const credentials = this.props.credentials || this.props.baseCredentials;
